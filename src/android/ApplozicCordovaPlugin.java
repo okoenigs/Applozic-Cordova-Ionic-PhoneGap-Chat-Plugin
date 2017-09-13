@@ -215,8 +215,9 @@ public class ApplozicCordovaPlugin extends CordovaPlugin {
             }
             callback.success(response);
         } else if (action.equals("processPushNotification")) {
-            Map<String, String> pushData = new HashMap<String, String>();
+			Map<String, String> pushData;
             //convert data to pushData
+            pushData = (Map) GsonUtils.getObjectFromJson(data.getString(0),Map.class);
             System.out.println(data);
             if (MobiComPushReceiver.isMobiComPushNotification(pushData)) {
                 MobiComPushReceiver.processMessageAsync(context, pushData);
